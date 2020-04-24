@@ -30,6 +30,10 @@ parts:
       bzr-explorer-snap.png: usr/share/pixmaps/bzr-explorer-snap.png
   bzr-explorer:
     plugin: nil
+    override-build: |
+      snapcraftctl build
+      cp -v $SNAPCRAFT_PART_INSTALL/usr/bin/bzr.bzr $SNAPCRAFT_PART_INSTALL/usr/bin/bzr
+      chmod +x $SNAPCRAFT_PART_INSTALL/usr/bin/bzr
     stage-packages: 
       - bzr
       - bzr-explorer
