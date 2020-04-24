@@ -36,5 +36,8 @@ parts:
 
 apps:
   bzr-explorer:
+    environment:
+      PATH: $SNAP/usr/bin:$SNAP/bin/:$PATH
+      PYTHONPATH: $SNAP/usr/lib/python2.7/site-packages:$SNAP/usr/lib/python2.7/dist-packages:$PYTHONPATH
     desktop: usr/share/applications/bzr-explorer-snap.desktop
     command: wrapper
