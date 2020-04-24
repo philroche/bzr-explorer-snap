@@ -4,6 +4,6 @@ Version=1.0
 Name=Bazaar Explorer
 GenericName=Version Control GUI
 Comment=GUI application for using Bazaar
-Icon=${SNAP}/meta/gui/bzr-explorer.png
+Icon=${SNAP}/usr/share/pixmaps/bzr-explorer-snap.png
 Exec=bzr-explorer
 Categories=Development;RevisionControl;
