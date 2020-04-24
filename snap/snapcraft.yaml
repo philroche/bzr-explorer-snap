@@ -1,0 +1,38 @@
+name: bzr-explorer # you probably want to 'snapcraft register <name>'
+base: core18 # the base snap is the execution environment for this snap
+version: '0.1' # just for humans, typically '1.2+git' or '1.3.2'
+summary: Desktop application for using the Bazaar Version Control System # 79 char long summary
+description: |
+  Bazaar Explorer is a desktop application for using the Bazaar Version Control 
+  System. It provides a high level interface to all commonly used features, 
+  launching "applets" from the QBzr plug-in to provide most of the functionality. 
+  Alternatively, the applets from the bzr-gtk plug-in can be used if it is 
+  installed. Bazaar Explorer runs on GNOME, KDE, Windows, Mac OS X and FreeBSD.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: classic # use 'strict' once you have the right plugs and slots
+
+parts:  
+  bzr-explorer-wrapper:
+    plugin: dump
+    source: snap/local
+    override-build: |
+      chmod +x wrapper
+      chmod +x bzr-explorer-snap.desktop
+      snapcraftctl build
+    stage:
+      - usr/bin/wrapper
+      - usr/share/applications/bzr-explorer-snap.desktop
+    organize:
+      wrapper: usr/bin/wrapper
+      bzr-explorer-snap.desktop: usr/share/applications/bzr-explorer-snap.desktop
+  bzr-explorer:
+    plugin: nil
+    stage-packages: 
+      - bzr
+      - bzr-explorer
+
+apps:
+  bzr-explorer:
+    desktop: usr/share/applications/bzr-explorer-snap.desktop
+    command: wrapper
